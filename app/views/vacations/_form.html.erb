@@ -1,0 +1,27 @@
+<%= error_messages_for(@vacation) %>
+<table summary="vacation form fields">
+  <tr>
+    <td><%= f.hidden_field(:customer_id, :value => @customer.id) %></td>
+  </tr>
+    <tr>
+    <th><%= f.label(:vacation_type , 'النوع') %></th>
+    <th><%= f.select(:vacation_type , ['عادية', 'وفاة', 'زواج' , 'نقاهة' , 'مراجعة مشفى']) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:vacation_date, "تبدأ عند") %></th>
+    <td><%= f.date_select :vacation_date , {:default => Time.now} %></td>
+  </tr>
+
+  <tr>  <tr>
+    <th><%= f.label(:period, 'المدة') %></th>
+    <th><%= f.select(:period, 1..30)%></th>
+  </tr>
+
+    <th><%= f.label(:reason , 'السبب')%></th>
+    <th><%= f.text_field(:reason) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:note , 'ملاحظة')%></th>
+    <th><%= f.text_field(:note)%></th>
+  </tr>
+</table>

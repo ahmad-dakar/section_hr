@@ -1,0 +1,17 @@
+<% @page_title = "مكافأة جديدة" %>
+
+<%= link_to('<< العودة إلى القائمة', {:controller => 'customers', :action => 'show', :customer_id => @customer.id}, :class => 'back-link') %>
+
+<div class="reward new">
+  <h2>إضافة مكافأة</h2>
+
+  <%= form_for(:reward, :url => {:action => 'create', :customer_id => @customer.id}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("إضافة") %>
+    </div>
+
+  <% end %>
+</div>

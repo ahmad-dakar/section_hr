@@ -1,0 +1,61 @@
+<% @page_title = "قائمة العناصر" %>
+<br/>
+<br/>
+
+
+<div class="customers index">
+  <h2>العناصر <button id="new_item_btn"  class="btn btn-default" >إضافة عنصر</button></h2>
+  <div style="padding-top: 20px;">
+  </div>
+  <div style="padding-bottom: 15px; color: #595959;">     
+    
+    عدد العناصر الموجودة <%= @customers.count %>  
+  </div>
+  <div>
+    <table class="table table-bordered" summary="قائمة العناصر">
+      <tr class="header">
+        <th>&nbsp;</th>
+        <th>الاسم الثلاثي</th>
+        <th>المواليد</th>
+        <th>مكان الاقامة الحالي</th>
+        <th>رقم الهاتف</th>
+        <th>رقم الموبايل</th>
+        <th>الحالة الاجتماعية</th>
+        <th>الخيارات</th>
+      </tr>
+      <% seq = 1 %>
+      <% @customers.each do |customer| %>
+      <tr >
+        <td><%= seq %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.birthday.to_date %></td>
+        <td><%= customer.temp_place %></td>
+        <td><%= customer.phone %></td>
+        <td><%= customer.mobile %></td>
+        <td><%= customer.married ? 'متزوج' : 'إعذب' %></td>
+        <td class="actions">
+          <%= link_to("مشاهدة", {:action => 'show', :customer_id => customer.id , :term => params['term']}, :class => 'action_show btn btn-default ' , :style => "padding: 2px 6px; background-color: #d1d1e0;") %>
+          <%= link_to("تعديل", {:action => 'edit', :customer_id => customer.id, :term => params['term']}, :class => 'action_edit btn btn-default ' , :style => "padding: 2px 6px; background-color: #d1d1e0;") %>
+          <%= link_to("حذف", {:action => 'delete', :customer_id => customer.id, :term => params['term']}, :class => 'action_delete btn btn-default ' , :style => "padding: 2px 6px; background-color: #d1d1e0;") %>
+        </td>
+      </tr>
+      <% seq += 1 %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= render(:partial => 'new_customer_modal') %>
+
+<script>
+$(document).ready(function(){
+    $("#new_item_btn").click(function(){
+        $("#myModal").modal({backdrop: false});
+    });   
+});
+</script>
+
+
+
+
+

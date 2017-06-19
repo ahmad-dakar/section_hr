@@ -1,0 +1,22 @@
+<%= error_messages_for(@reward) %>
+<table summary="reward form fields">
+  <tr>
+    <td><%= f.hidden_field(:customer_id, :value => @customer.id) %></td>
+  </tr>
+    <tr>
+    <th><%= f.label(:reward_string , 'النوع') %></th>
+    <th><%= f.text_field(:reward_string) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:reward_date, "تاريخ المكافأة") %></th>
+    <td><%= f.date_select :reward_date , {:default => Time.now} %></td>
+  </tr>
+
+    <th><%= f.label(:reason , 'السبب')%></th>
+    <th><%= f.text_field(:reason) %></th>
+  </tr>
+  <tr>
+    <th><%= f.label(:note , 'ملاحظة')%></th>
+    <th><%= f.text_area(:note)%></th>
+  </tr>
+</table>

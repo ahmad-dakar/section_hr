@@ -1,0 +1,17 @@
+<% @page_title = "عنصر جديد" %>
+
+<%= link_to('<< العودة إلى القائمة', {:action => 'index', :term => params['term']}, :class => 'back-link') %>
+
+<div class="subjects new">
+  <h2>إضافة عنصر</h2>
+
+  <%= form_for(:customer, :url => {:action => 'create'}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("إنشاء") %>
+    </div>
+
+  <% end %>
+</div>

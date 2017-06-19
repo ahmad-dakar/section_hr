@@ -1,0 +1,17 @@
+<% @page_title = "إجازة جديدة" %>
+
+<%= link_to('<< العودة إلى القائمة', {:controller => 'customers', :action => 'show', :customer_id => @customer.id}, :class => 'back-link') %>
+
+<div class="vacation new">
+  <h2>إضافة إجازة</h2>
+
+  <%= form_for(:vacation, :url => {:action => 'create', :customer_id => @customer.id}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("إضافة") %>
+    </div>
+
+  <% end %>
+</div>

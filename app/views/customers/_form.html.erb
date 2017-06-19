@@ -1,0 +1,56 @@
+<%= error_messages_for(@customer) %>
+<table class="table" summary="customer form fields">
+  <tr>
+    <th><%= f.label(:first_name, "الاسم") %></th>
+    <td><%= f.text_field(:first_name) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:last_name, "الكنية")%></th>
+  	<td><%= f.text_field(:last_name) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:father_name, "السم الأب")%></th>
+  	<td><%= f.text_field(:father_name) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:mother_name, "اسم الأم")%></th>
+  	<td><%= f.text_field(:mother_name) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:identity_number, "رقم الهوية")%></th>
+  	<td><%= f.text_field(:identity_number) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:birthday, "تاريخ الميلاد")%></th>
+  	<td><%= f.date_select :birthday, {order: [:month, :day, :year], prompt: { day: 'يوم', month: 'شهر', year: 'سنة' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true} %>
+  	</td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:phone, "الهتاف")%></th>
+  	<td><%= f.text_field(:phone) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:mobile, "رقم الموبايل")%></th>
+  	<td><%= f.text_field(:mobile) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:temp_place, "مكان الإقامة الحالي")%></th>
+  	<td><%= f.text_field(:temp_place) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:permanent_place, "مكان الإقامة الدائم")%></th>
+  	<td><%= f.text_field(:permanent_place) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:permanent_phone, "الهاتف الدائم")%></th>
+  	<td><%= f.text_field(:permanent_phone) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:married, "متزوج")%></th>
+  	<td><%= f.check_box(:married) %></td>
+  </tr>
+  <tr>
+  	<th><%= f.label(:children_num, "عدد الأولاد")%></th>
+  	<td><%= f.select(:children_num , 0..15) %></td>
+  </tr>
+</table>

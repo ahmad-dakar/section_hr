@@ -1,0 +1,9 @@
+td.actions{
+	min-width: 200px;
+	text-align: center;
+}
+.action_show,.action_delete,.action_edit{
+	display: inline;
+	
+	background-color: green;
+}

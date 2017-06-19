@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ذاتية القسم | <%= @page_title || "Admin" %></title>
+    <%= stylesheet_link_tag('application', :media => 'all') %>
+    <%= javascript_include_tag('application') %>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      th {
+        background-color: #cccccc;
+      }
+      .customer_table th {
+        width: 200px;
+        background-color: #999999;
+      }
+      .customer_table td {
+        text-align: center;
+      }
+
+      .sidenav{
+        float: right;
+        background-color: #262626;
+        height: 100%;
+        padding-top: 20px;
+      }
+      .row.content {height: 800px;}
+      .authentication {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #ffe6e6;">
+
+    <header class="navbar navbar-fixed-top navbar-inverse" >
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">ذاتية قسم</div>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="index">الصفحة الرئيسية</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-left">          
+          <li class="authentication">
+            <% if current_user %>
+              المستخدم الحالي: <%= current_user.to_s%>.
+              <%= link_to "تسجيل خروج", logout_path , :style => 'display: inline; color:"#f2f2f2"'%>
+            <% else %>
+              <%=link_to "إنشاء حساب جديد", signup_path, :style => 'display: inline;' %> 
+              <%= link_to "تسجيل دخول", login_path, :style => 'display: inline;'%>
+            <% end %>
+          </li>
+          <!--<li><%= link_to "تسجيل دخول", '#' %></li>-->
+        </ul>
+        
+        <form class="navbar-form navbar-right" action="index" style="padding-right: 25px;"> 
+          <div class="form-group">
+            <input type="text" name="term" id="term" class="form-control" placeholder="بحث عن عنصر">
+          </div>          
+          <button type="submit" class="btn btn-default">بحث</button>
+        </form>        
+        
+        
+      </div>
+    </header>
+    <div class="container-fluid" >
+          <div class="row content" >
+          
+            <div class="col-sm-2 sidenav" id="navigation1" >
+                
+            </div>
+          
+          <div class="col-sm-10 " id="content1" >
+            <div class="notice">
+              <% if !flash[:notice].blank? %>
+                <div class="notice">
+                  <%= flash[:notice] %>
+                </div>
+              <% end %>
+            </div>
+            <div id="inside-content">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </body>
+</html>

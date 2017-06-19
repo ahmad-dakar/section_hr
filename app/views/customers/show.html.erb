@@ -1,0 +1,144 @@
+<% @page_title = "صفحة العنصر" %>
+
+<%= link_to('<< العودة إلى القائمة', {:action => 'index' , :term => params['term']}, :class => 'back-link') %>
+
+<div class="customer show">
+  <h2>صفحة العنصر</h2> 
+
+  <table class="table customer_table" summary="صفحة العنصر">
+    <tr>
+      <th>الاسم</th>
+      <td><%= @customer.name %></td>
+    </tr>
+    <tr>
+      <th>الأم</th>
+      <td><%= @customer.mother_name %></td>
+    </tr>
+      <th>رقم الهوية</th>
+      <td><%= @customer.identity_number %></td>
+    </tr>
+    <tr>
+      <th>تاريخ الميلاد</th>
+      <td><%= @customer.birthday.to_date %></td>
+    </tr>
+    <tr>
+      <th>الهاتف</th>
+      <td><%= @customer.phone %></td>
+    </tr>
+    <tr>
+      <th>الموبايل</th>
+      <td><%= @customer.mobile %></td>
+    </tr>
+    <tr>
+      <th>المكان الحالي</th>
+      <td><%= @customer.temp_place %></td>
+    </tr>
+    <tr>
+      <th>المكان الدائم</th>
+      <td><%= @customer.permanent_place %></td>
+    </tr>
+    <tr>
+      <th>رقم الهاتف الدائم</th>
+      <td><%= @customer.permanent_phone %></td>
+    </tr>
+    <tr>
+      <th>الحالة الإجتماعية</th>
+      <td><%= @customer.married ? 'متزوج' : 'أعذب' %></td>
+    </tr>
+    <tr>
+      <th>عدد الأولاد</th>
+      <td><%= @customer.children_num %></td>
+    </tr>
+    <tr>
+      <th>تاريخ الإضافة</th>
+      <td><%= @customer.created_at.to_date %></td>
+    </tr>
+    <tr>
+      <th>تاريخ آخر تعديل</th>
+      <td><%= @customer.updated_at.to_date %></td>
+    </tr>
+
+  </table>
+</div>
+<hr>
+<hr>
+<div class="listing vacations">
+  <h2>إجازات العنصر</h2>
+  <div class="add item"> <% link_to('إضافة إجازة للعنصر',{:controller => 'vacations' ,:action => 'new' , :customer_id => @customer.id }) %>
+    <button id="new_vacation_btn"  class="btn btn-default" >إضافة إجازة</button>
+  </div>
+  <table class="table" summary="قائمة الإجازات للعنصر">
+    <tr class="header">
+      <th>&nbsp;</th>
+      <th>تاريخ الإجازة</th>
+      <th>المدة</th>
+      <th>السبب</th>
+      <th>نوع الإجازة</th>
+      <th>الخيارات</th>
+    </tr>
+    <% @vacations.each do |vacation| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= vacation.id %></td>
+      <td><%= vacation.vacation_date.to_date %></td>
+      <td><%= vacation.period %></td>
+      <td><%= vacation.reason %></td>
+      <td><%= vacation.vacation_type %></td>
+      <td class="actions">
+        <%= link_to("حذف", {:controller => 'vacations' ,:action => 'delete', :vacation_id => vacation.id, :customer_id => @customer.id }, :class => 'action delete') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<hr>
+<hr>
+
+<div class="listing rewards">
+  <h2>مكافآت العنصر</h2>
+  <div class="add item"> <% link_to('إضافة مكافأى للعنصر',{:controller => 'rewards' ,:action => 'new' , :customer_id => @customer.id }) %>
+    <button id="new_reward_btn"  class="btn btn-default" >إضافة مكافأة</button>
+
+  </div>
+  <table class="table" summary="قائمة المكافآت للعنصر">
+    <tr class="header">
+      <th>&nbsp;</th>
+      <th>تاريخ المكافأة</th>
+      <th>المكافأة</th>
+      <th>السبب</th>
+      <th>ملاحظة</th>
+      <th>الخيارات</th>
+    </tr>
+    <% @rewards.each do |reward| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= reward.id %></td>
+      <td><%= reward.reward_date.to_date %></td>
+      <td><%= reward.reward_string %></td>
+      <td><%= reward.reason %></td>
+      <td><%= reward.note %></td>
+      <td class="actions">
+        <%= link_to("حذف", {:controller => 'rewards' ,:action => 'delete', :reward_id => reward.id, :customer_id => @customer.id }, :class => 'action delete') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<hr>
+<hr>
+
+
+<%= 
+  render(:partial => 'modals');
+%>
+
+<script>
+$(document).ready(function(){
+    $("#new_vacation_btn").click(function(){
+        $("#vacation_modal").modal({backdrop: false});
+    });
+    $("#new_reward_btn").click(function(){
+        $("#reward_modal").modal({backdrop: false});
+    });     
+});
+</script>
